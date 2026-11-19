@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+/* ==========================================================
+   CALCULADORA DE COMBUSTIBLE
+   Todo va dentro de .calc para no chocar con el resto de estilos
+   ========================================================== */
+
+.calc {
+    --azul: blue;
+    --negro: #000;
+    --blanco: #fff;
+    --gris: #4d4d4d;
+    --azul-suave: #eef0ff;
+
+    width: min(560px, calc(100% - 32px));
+    margin: 30px auto;
+    background: var(--blanco);
+    border: 2px solid var(--azul);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    text-align: left;
+}
+
+.calc *,
+.calc *::before,
+.calc *::after {
+    box-sizing: border-box;
+}
+
+.calc-cebra {
+    height: 12px;
+    background: repeating-linear-gradient(90deg, var(--azul) 0 28px, var(--blanco) 28px 56px);
+    border-bottom: 2px solid var(--azul);
+}
+
+.calc-cuerpo {
+    padding: 22px 22px 26px;
+}
+
+.calc h2 {
+    font-size: 24px;
+    margin: 0 0 4px;
+    color: var(--negro);
+}
+
+.calc-sub {
+    margin: 0 0 20px;
+    color: var(--gris);
+    font-size: 16px;
+}
+
+/* Selector tiempo / vueltas */
+.calc .modos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 2px solid var(--negro);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+.calc .modos button {
+    padding: 10px;
+    border: 0;
+    background: var(--blanco);
+    color: var(--negro);
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.calc .modos button + button {
+    border-left: 2px solid var(--negro);
+}
+
+.calc .modos button[aria-pressed="true"] {
+    background: var(--azul);
+    color: var(--blanco);
+}
+
+.calc .modos button:focus-visible,
+.calc input:focus-visible {
+    outline: 3px solid var(--azul);
+    outline-offset: 2px;
+}
+
+/* Campos */
+.calc .campo {
+    margin-bottom: 14px;
+}
+
+.calc label {
+    display: block;
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--negro);
+}
+
+.calc input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid var(--negro);
+    border-radius: 6px;
+    background: var(--blanco);
+    color: var(--negro);
+    font-size: 17px;
+    font-family: inherit;
+}
+
+.calc input:focus {
+    border-color: var(--azul);
+}
+
+.calc .pista {
+    margin-top: 3px;
+    color: var(--gris);
+    font-size: 13px;
+}
+
+.calc .fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.calc .opcional {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 2px solid var(--negro);
+}
+
+.calc .opcional-titulo {
+    margin: 0 0 12px;
+    color: var(--gris);
+    font-size: 14px;
+}
+
+/* Resultado */
+.calc .resultado {
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 8px;
+    background: var(--azul-suave);
+    border: 2px solid var(--azul);
+}
+
+.calc .resultado-label {
+    margin: 0;
+    color: var(--gris);
+    font-size: 15px;
+}
+
+.calc .litros {
+    margin: 2px 0 12px;
+    font-size: 54px;
+    font-weight: bold;
+    line-height: 1.1;
+    color: var(--azul);
+}
+
+.calc .litros small {
+    margin-left: 4px;
+    font-size: 22px;
+    color: var(--negro);
+}
+
+.calc .barra {
+    display: flex;
+    height: 14px;
+    border: 2px solid var(--negro);
+    border-radius: 7px;
+    background: var(--blanco);
+    overflow: hidden;
+}
+
+.calc .barra span {
+    display: block;
+    height: 100%;
+}
+
+.calc .barra .base { background: var(--negro); }
+.calc .barra .reserva { background: var(--azul); }
+
+.calc dl {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    margin: 14px 0 0;
+    font-size: 16px;
+}
+
+.calc dt { color: var(--gris); }
+
+.calc dd {
+    margin: 0;
+    font-weight: bold;
+    text-align: right;
+}
+
+.calc .error {
+    margin: 0;
+    padding-left: 10px;
+    border-left: 4px solid var(--azul);
+    font-weight: bold;
+    color: var(--negro);
+}
+
+.calc .nota {
+    margin: 12px 0 0;
+    font-size: 15px;
+}
+
+@media (max-width: 420px) {
+    .calc .fila { grid-template-columns: 1fr; }
+    .calc .litros { font-size: 44px; }
+}
+    </style>
+    <title>Calculadora de combustible</title>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <a href="indexprueba.php"><img src="fotos/logof1azulway.png" width="200"></a>
+
+        <ul>
+            <li><a href="ultimosresul.php">Últimos resultados</a></li>
+            <li><a href="tempanteriores.php">Temporadas anteriores</a></li>
+            <li><a href="pilotos.php">Pilotos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="automobilista.php">Automobilista</a></li>
+            <li><a href="sobrenosotros.html">Sobre nosotros</a></li>
+            <li><a href="calculadora-combustible.html">Calculadora de combustible</a></li>
+        </ul>
+
+        </header>
+
+        <div class='presentacion'>
+
+                <h1>Calculadora de combustible</h1>
+
+        </div>
+
+        <main>
+
+            <section class="calc">
+              <div class="calc-cebra" aria-hidden="true"></div>
+              <div class="calc-cuerpo">
+                <p class="calc-sub">Calcula los litros que necesitas para terminar la carrera.</p>
+
+                <div class="modos" role="group" aria-label="Tipo de carrera">
+                  <button type="button" id="modoTiempo" aria-pressed="true">Carrera por tiempo</button>
+                  <button type="button" id="modoVueltas" aria-pressed="false">Carrera por vueltas</button>
+                </div>
+
+                <div class="campo" id="campoTiempo">
+                  <label for="duracion">Duración de la carrera (minutos)</label>
+                  <input id="duracion" type="text" inputmode="decimal" value="45" autocomplete="off">
+                </div>
+
+                <div class="campo" id="campoVueltas" hidden>
+                  <label for="vueltas">Número de vueltas</label>
+                  <input id="vueltas" type="text" inputmode="numeric" value="30" autocomplete="off">
+                </div>
+
+                <div class="fila">
+                  <div class="campo">
+                    <label for="tiempoVuelta">Tiempo por vuelta</label>
+                    <input id="tiempoVuelta" type="text" value="1:32.500" autocomplete="off">
+                    <div class="pista">Formato m:ss.mmm</div>
+                  </div>
+                  <div class="campo">
+                    <label for="consumo">Consumo por vuelta (L)</label>
+                    <input id="consumo" type="text" inputmode="decimal" value="2.8" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="opcional">
+                  <p class="opcional-titulo">Opcional</p>
+                  <div class="fila">
+                    <div class="campo">
+                      <label for="margen">Vueltas de reserva</label>
+                      <input id="margen" type="text" inputmode="numeric" value="1" autocomplete="off">
+                    </div>
+                    <div class="campo">
+                      <label for="deposito">Capacidad del depósito (L)</label>
+                      <input id="deposito" type="text" inputmode="decimal" placeholder="Sin límite" autocomplete="off">
+                    </div>
+                  </div>
+                </div>
+
+                <section class="resultado" aria-live="polite" id="resultado"></section>
+              </div>
+            </section>
+
+        </main>
+
+        <footer>
+            <p>Desarrollado por Alberto Cuesta | 2026</p>
+            <p>Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+<script>
+(function () {
+  var modo = "tiempo";
+  var $ = function (id) { return document.getElementById(id); };
+
+  function num(texto) {
+    var t = String(texto).trim().replace(",", ".");
+    if (t === "") return NaN;
+    return /^\d*\.?\d+$/.test(t) ? parseFloat(t) : NaN;
+  }
+
+  // Acepta "1:32.450", "1:32,45" o "92.4" (segundos)
+  function parseVuelta(texto) {
+    var t = String(texto).trim().replace(",", ".");
+    var m = t.match(/^(\d+):(\d{1,2}(?:\.\d+)?)$/);
+    if (m) return parseInt(m[1], 10) * 60 + parseFloat(m[2]);
+    return num(t);
+  }
+
+  function fmt(n, d) {
+    return n.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+
+  function calcular() {
+    var out = $("resultado");
+    var vuelta = parseVuelta($("tiempoVuelta").value);
+    var consumo = num($("consumo").value);
+    var margenTxt = $("margen").value.trim();
+    var margen = margenTxt === "" ? 0 : num(margenTxt);
+    var depTxt = $("deposito").value.trim();
+    var deposito = depTxt === "" ? null : num(depTxt);
+    var vueltas;
+
+    if (modo === "tiempo") {
+      var min = num($("duracion").value);
+      if (!(min > 0) || !(vuelta > 0)) { out.innerHTML = '<p class="error">Introduce la duración y el tiempo por vuelta.</p>'; return; }
+      // La carrera acaba cuando el líder cruza meta tras agotarse el tiempo
+      vueltas = Math.ceil((min * 60) / vuelta);
+    } else {
+      vueltas = Math.round(num($("vueltas").value));
+      if (!(vueltas > 0)) { out.innerHTML = '<p class="error">Introduce el número de vueltas.</p>'; return; }
+    }
+
+    if (!(consumo > 0)) { out.innerHTML = '<p class="error">Introduce el consumo por vuelta en litros.</p>'; return; }
+    if (isNaN(margen) || margen < 0) { out.innerHTML = '<p class="error">Las vueltas de reserva deben ser 0 o más.</p>'; return; }
+    if (deposito !== null && !(deposito > 0)) { out.innerHTML = '<p class="error">La capacidad del depósito debe ser mayor que 0.</p>'; return; }
+
+    var base = vueltas * consumo;
+    var extra = margen * consumo;
+    var total = base + extra;
+    var pBase = (base / total) * 100;
+
+    var html =
+      '<p class="resultado-label">Combustible necesario</p>' +
+      '<p class="litros">' + fmt(total, 1) + '<small>L</small></p>' +
+      '<div class="barra" aria-hidden="true"><span class="base" style="width:' + pBase + '%"></span><span class="reserva" style="width:' + (100 - pBase) + '%"></span></div>' +
+      '<dl>' +
+        '<dt>Vueltas de carrera</dt><dd>' + vueltas + '</dd>' +
+        '<dt>Combustible para la carrera</dt><dd>' + fmt(base, 1) + ' L</dd>' +
+        '<dt>Reserva (' + margen + (margen === 1 ? ' vuelta' : ' vueltas') + ')</dt><dd>' + fmt(extra, 1) + ' L</dd>' +
+      '</dl>';
+
+    if (deposito !== null) {
+      if (total <= deposito) {
+        html += '<p class="nota">Cabe en el depósito: puedes hacer la carrera sin parar.</p>';
+      } else {
+        var paradas = Math.ceil(total / deposito) - 1;
+        html += '<p class="nota">Supera el depósito de ' + fmt(deposito, 1) + ' L: necesitas al menos <strong>' +
+                paradas + (paradas === 1 ? ' parada' : ' paradas') + '</strong> para repostar.</p>';
+      }
+    }
+    out.innerHTML = html;
+  }
+
+  function setModo(m) {
+    modo = m;
+    $("modoTiempo").setAttribute("aria-pressed", m === "tiempo");
+    $("modoVueltas").setAttribute("aria-pressed", m === "vueltas");
+    $("campoTiempo").hidden = m !== "tiempo";
+    $("campoVueltas").hidden = m !== "vueltas";
+    calcular();
+  }
+
+  $("modoTiempo").addEventListener("click", function () { setModo("tiempo"); });
+  $("modoVueltas").addEventListener("click", function () { setModo("vueltas"); });
+  ["duracion", "vueltas", "tiempoVuelta", "consumo", "margen", "deposito"].forEach(function (id) {
+    $(id).addEventListener("input", calcular);
+  });
+  calcular();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,625 @@
+body{
+    background: whitesmoke;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-top: 0%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    align-items: stretch;
+    gap: 25px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.card {
+    background: white;
+    border: 2px solid blue;
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0,0,255,0.25);
+}
+
+.foto {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #eef0ff;
+    border-bottom: 2px solid blue;
+    overflow: hidden;
+}
+
+.foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sin-foto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url("../fotos/fondoacuadros.png");
+    background-size: cover;
+    color: #555;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.datos {
+    padding: 15px;
+}
+
+.cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.cabecera .name {
+    margin-bottom: 0;
+}
+
+.info {
+    color: #555;
+    margin: 5px 0;
+}
+
+.number {
+    font-size: 22px;
+    font-weight: bold;
+    color: #e10600;
+}
+
+header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: -5%;
+}
+
+ul{
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    margin-left: -5%;
+}
+
+ul li{
+    margin: 30px;
+    margin-left: -5%;
+}
+
+ul li a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 120%;
+    padding: 5px;
+    border-radius: 10%;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+ul li a:hover{
+    cursor: pointer;
+    background: blue;
+    color: white;
+}
+
+h1{
+    font-style: italic;
+}
+
+.presentacion{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.presentacion h1{
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 4px solid blue;
+}
+
+main{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+}
+
+main.pagina{
+    flex-direction: column;
+}
+
+.col{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 5%;
+    padding: 0px;
+    margin-left: -1%;
+}
+
+.pagina .col{
+    justify-content: center;
+    margin: 20px 0;
+}
+
+aside{
+    display: flex;
+    justify-content: center;
+    margin: 4px;
+    margin-top: 0%;
+}
+
+.video{
+    align-items: center;
+}
+
+.selector{
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border: 2px solid blue;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+.selector div{
+    flex: 1;
+    min-width: 200px;
+}
+
+.selector label{
+    margin-top: 0;
+}
+
+.selector select:focus{
+    outline: none;
+    border-color: blue;
+}
+
+.selector input[type="submit"]{
+    width: auto;
+    margin-top: 0;
+    padding: 10px 25px;
+}
+
+.aviso{
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border: 2px solid blue;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+}
+
+table{
+    text-align: center;
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
+    margin-bottom: 4%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid blue;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.tabla-resultados{
+    width: 100%;
+    max-width: 700px;
+}
+
+caption{
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+th{
+    color: white;
+    background: blue;
+    font-size: 20px;
+    padding: 12px 15px;
+}
+
+td{
+    font-size: 20px;
+    background-color: white;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+tbody tr:nth-child(even) td{
+    background-color: #eef0ff;
+}
+
+tbody tr:hover td{
+    background-color: lightblue;
+}
+
+tbody tr:last-child td{
+    border-bottom: 0;
+}
+
+.podio td:first-child{
+    font-weight: bold;
+    color: #e10600;
+}
+
+.num-derecha{
+    text-align: right;
+}
+
+.Formulario {
+    max-width: 500px; 
+    margin: 0 auto 30px auto; 
+    text-align: left; 
+}
+
+.borde-form {
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+legend {
+    font-weight: 800;
+    background: blue;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+
+label {
+    display: block; 
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    padding: 0;
+}
+
+
+input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+select{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    font-size: 16px;
+}
+
+.Formulario input:focus,
+.Formulario select:focus{
+    outline: none;
+    border-color: blue;
+    box-shadow: 0 0 0 2px lightblue;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background:blue;
+    color: white;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 20px;   
+}
+
+input[type="submit"]:hover{
+    cursor: pointer;
+    background: lightblue;
+    color: black;
+}
+
+.popup{
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, -150%);
+    padding: 15px 30px;
+    background: #28a745;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    z-index: 1000;
+}
+
+.popup.visible{
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+.popup.error{
+    background: #e10600;
+}
+
+footer{
+    margin: 50px;
+    text-align: center;
+}
+
+footer p{
+    text-align: center;
+    margin-bottom: 10px;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+/* ==========================================================
+   CALCULADORA DE COMBUSTIBLE
+   Todo va dentro de .calc para no chocar con el resto de estilos
+   ========================================================== */
+
+.calc {
+    --azul: blue;
+    --negro: #000;
+    --blanco: #fff;
+    --gris: #4d4d4d;
+    --azul-suave: #eef0ff;
+
+    width: min(560px, calc(100% - 32px));
+    margin: 30px auto;
+    background: var(--blanco);
+    border: 2px solid var(--azul);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    text-align: left;
+}
+
+.calc *,
+.calc *::before,
+.calc *::after {
+    box-sizing: border-box;
+}
+
+.calc-cebra {
+    height: 12px;
+    background: repeating-linear-gradient(90deg, var(--azul) 0 28px, var(--blanco) 28px 56px);
+    border-bottom: 2px solid var(--azul);
+}
+
+.calc-cuerpo {
+    padding: 22px 22px 26px;
+}
+
+.calc h2 {
+    font-size: 24px;
+    margin: 0 0 4px;
+    color: var(--negro);
+}
+
+.calc-sub {
+    margin: 0 0 20px;
+    color: var(--gris);
+    font-size: 16px;
+}
+
+/* Selector tiempo / vueltas */
+.calc .modos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 2px solid var(--negro);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+.calc .modos button {
+    padding: 10px;
+    border: 0;
+    background: var(--blanco);
+    color: var(--negro);
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.calc .modos button + button {
+    border-left: 2px solid var(--negro);
+}
+
+.calc .modos button[aria-pressed="true"] {
+    background: var(--azul);
+    color: var(--blanco);
+}
+
+.calc .modos button:focus-visible,
+.calc input:focus-visible {
+    outline: 3px solid var(--azul);
+    outline-offset: 2px;
+}
+
+/* Campos */
+.calc .campo {
+    margin-bottom: 14px;
+}
+
+.calc label {
+    display: block;
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--negro);
+}
+
+.calc input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid var(--negro);
+    border-radius: 6px;
+    background: var(--blanco);
+    color: var(--negro);
+    font-size: 17px;
+    font-family: inherit;
+}
+
+.calc input:focus {
+    border-color: var(--azul);
+}
+
+.calc .pista {
+    margin-top: 3px;
+    color: var(--gris);
+    font-size: 13px;
+}
+
+.calc .fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.calc .opcional {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 2px solid var(--negro);
+}
+
+.calc .opcional-titulo {
+    margin: 0 0 12px;
+    color: var(--gris);
+    font-size: 14px;
+}
+
+/* Resultado */
+.calc .resultado {
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 8px;
+    background: var(--azul-suave);
+    border: 2px solid var(--azul);
+}
+
+.calc .resultado-label {
+    margin: 0;
+    color: var(--gris);
+    font-size: 15px;
+}
+
+.calc .litros {
+    margin: 2px 0 12px;
+    font-size: 54px;
+    font-weight: bold;
+    line-height: 1.1;
+    color: var(--azul);
+}
+
+.calc .litros small {
+    margin-left: 4px;
+    font-size: 22px;
+    color: var(--negro);
+}
+
+.calc .barra {
+    display: flex;
+    height: 14px;
+    border: 2px solid var(--negro);
+    border-radius: 7px;
+    background: var(--blanco);
+    overflow: hidden;
+}
+
+.calc .barra span {
+    display: block;
+    height: 100%;
+}
+
+.calc .barra .base { background: var(--negro); }
+.calc .barra .reserva { background: var(--azul); }
+
+.calc dl {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    margin: 14px 0 0;
+    font-size: 16px;
+}
+
+.calc dt { color: var(--gris); }
+
+.calc dd {
+    margin: 0;
+    font-weight: bold;
+    text-align: right;
+}
+
+.calc .error {
+    margin: 0;
+    padding-left: 10px;
+    border-left: 4px solid var(--azul);
+    font-weight: bold;
+    color: var(--negro);
+}
+
+.calc .nota {
+    margin: 12px 0 0;
+    font-size: 15px;
+}
+
+@media (max-width: 420px) {
+    .calc .fila { grid-template-columns: 1fr; }
+    .calc .litros { font-size: 44px; }
+}
