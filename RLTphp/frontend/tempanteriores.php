@@ -28,7 +28,7 @@ if (isset($_POST["carrera"])) {
         
     <div class="container">
         <header>
-            <a href="indexprueba.php"><img src="fotos/logof1azulway.png" width="200"></a>
+            <a href="index.php"><img src="fotos/logof1azulway.png" width="200"></a>
 
         <ul>
             <li><a href="ultimosresul.php">Últimos resultados</a></li>
